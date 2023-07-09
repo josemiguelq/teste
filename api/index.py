@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+import logging
 import os
 
 app = Flask(__name__)
@@ -16,6 +17,7 @@ def webhook_whatsapp():
         return "Authentication failed. Invalid Token."
 
     client = WhatsAppWrapper()
+    logging.warning(str(request.get_json()))
 
     response = client.process_webhook_notification(request.get_json())
 

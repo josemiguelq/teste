@@ -53,6 +53,7 @@ def webhook_whatsapp():
     if messages[0]:
         message = messages[0]['text']['body']
         to_num = messages[0]['from']
+        to_num = to_num[:4] + '-' + to_num[4:]
         e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
         print(e_saudacao)
         if e_saudacao:

@@ -35,9 +35,11 @@ def message_oi(to_num):
 
 
 def to_num_format(to_num):
+    print(len(to_num) == 12)
     if len(to_num) == 12:
         return to_num[:4] + '9' + to_num[4:]
-    return to_num
+    else:
+        return to_num
 
 
 @app.route("/webhook/", methods=["POST", "GET"])

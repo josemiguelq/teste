@@ -39,13 +39,12 @@ def webhook_whatsapp():
     tz = pytz.timezone('America/Santiago')
     part = get_part_of_day(datetime.now(tz).hour)
     print(datetime.now(tz))
-    ola = {'messaging_product': 'whatsapp', 'to': '',
-           'type': 'template',
-           'template': {'name': 'saudacao', 'language': {'code': 'en_US'},
-                        'components': [
-                            {'type': 'body',
-                             'parameters': [{'type': 'text', 'text': part}]}
-                        ]}}
+    ola = {'messaging_product': 'whatsapp',
+           'recipient_type': 'individual',
+           'to': '5567991910048',
+           'type': 'text',
+           'text' : {'body' : part}
+           }
     host = 'https://graph.facebook.com/v17.0/105496645940349/messages'
 
     list_of_saudacoes = ['oi', 'ola', 'eae', 'eai', 'bom dia']

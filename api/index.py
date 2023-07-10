@@ -20,20 +20,23 @@ def get_part_of_day(h):
     else:
         return "Boa tarde! 🦁 🦁 📱📱"
 
+
 def message_oi(to_num):
     tz = pytz.timezone('America/Santiago')
     part = get_part_of_day(datetime.now(tz).hour)
     return {'messaging_product': 'whatsapp',
-           'recipient_type': 'individual',
-           'to': to_num,
-           'type': 'text',
-           'text': {'body': part}
-           }
+            'recipient_type': 'individual',
+            'to': to_num,
+            'type': 'text',
+            'text': {'body': part}
+            }
+
 
 def to_num_format(to_num):
     if len(to_num) == 12:
-       return to_num[:4] + '9' + to_num[4:]
+        return to_num[:4] + '9' + to_num[4:]
     return to_num
+
 
 @app.route("/webhook/", methods=["POST", "GET"])
 def webhook_whatsapp():

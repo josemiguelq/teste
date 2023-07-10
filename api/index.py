@@ -24,13 +24,16 @@ def webhook_whatsapp():
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
     print(str(request.get_json()))
-
+    messages = request.get_json()['entry'][0]['changes'][0]['value']['messages']
 #    client = WhatsAppWrapper()
 #    response = client.process_webhook_notification(request.get_json())
     my_headers = {'Authorization' : 'Bearer ' + wpp, 'Content-Type': 'application/json'}
     my_mes = { 'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template", "template": { "name": "hello_world", "language": { "code": "en_US" } } }
-   # response = requests.post('https://graph.facebook.com/v17.0/105496645940349/messages', headers=my_headers, json=my_mes)
-   # print(response.content)
+
+    if messages[0] 
+       if 'modulo' in messages[0]['text']['body']
+          response = requests.post('https://graph.facebook.com/v17.0/105496645940349/messages', headers=my_headers, json=my_mes)
+          print(response.content)
 
     # Do anything with the response
     # Sending a message to a phone number to confirm the webhook is working

@@ -56,17 +56,13 @@ def webhook_whatsapp():
     if messages[0]:
         message = messages[0]['text']['body']
         if any(substring in message.lower() for substring in list_of_saudacoes):
-            requests.post(host, headers=my_headers, json=)
+            requests.post(host, headers=my_headers, json=ola)
         if 'modulo' in messages[0]['text']['body']:
             response = requests.post('https://graph.facebook.com/v17.0/105496645940349/messages',
                                      headers=my_headers, json=my_mes)
             # print(response.content)
 
-
-# Do anything with the response
-# Sending a message to a phone number to confirm the webhook is working
-
-return jsonify({"status": "success"}, 200)
+    return jsonify({"status": "success"}, 200)
 
 
 @app.route('/about')

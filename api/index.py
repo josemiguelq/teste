@@ -17,8 +17,10 @@ app = Flask(__name__)
 def get_part_of_day(h):
     if 5 <= h <= 12:
         return "Bom dia! 🦁 🦁 📱📱"
-    else:
+    if 13 <= h <= 18:
         return "Boa tarde! 🦁 🦁 📱📱"
+    else:
+        return "Boa noite! 🦁 🦁 📱📱"
 
 
 def message_oi(to_num):

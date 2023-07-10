@@ -30,6 +30,11 @@ def message_oi(to_num):
            'text': {'body': part}
            }
 
+def to_num_format(to_num):
+    if len(to_num) == 12:
+       return to_num[:4] + '9' + to_num[4:]
+    return to_num
+
 @app.route("/webhook/", methods=["POST", "GET"])
 def webhook_whatsapp():
     vt = os.environ.get("VERIFY_TOKEN", default="true")
@@ -52,8 +57,7 @@ def webhook_whatsapp():
 
     if messages[0]:
         message = messages[0]['text']['body']
-        to_num = messages[0]['from']
-        to_num = to_num[:4] + '9' + to_num[4:]
+        to_num = to_num_format(messages[0]['from'])
         e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
         print(e_saudacao)
         if e_saudacao:

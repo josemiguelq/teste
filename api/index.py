@@ -17,7 +17,7 @@ app = Flask(__name__)
 def get_part_of_day(h):
     if 5 <= h <= 12:
         return "Bom dia!"
-    else
+    else:
         return "Boa tarde!"
 
 

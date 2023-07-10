@@ -6,6 +6,7 @@ import requests
 import logging
 import os
 import sys
+import pytz
 from datetime import datetime, time
 
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
@@ -40,8 +41,9 @@ def webhook_whatsapp():
     my_mes = {'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template",
               "template": {"name": "hello_world", "language": {"code": "en_US"}}}
 
-    part = get_part_of_day(datetime.now().hour)
-    print(datetime.now())
+    tz = pytz.timezone('America/Santiago')
+    part = get_part_of_day(datetime.now(tz).hour)
+    print(datetime.now(tz))
     ola = {'messaging_product': 'whatsapp', 'to': '',
            'type': 'template',
            'template': {'name': 'saudacao', 'language': {'code': 'en_US'},

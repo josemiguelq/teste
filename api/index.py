@@ -59,7 +59,8 @@ def webhook_whatsapp():
         if e_saudacao:
             ola = message_oi(to_num)
             print(ola)
-            requests.post(host, headers=my_headers, json=ola)
+            response = requests.post(host, headers=my_headers, json=ola)
+            print(response)
         if 'modulo' in messages[0]['text']['body']:
             response = requests.post(host, headers=my_headers, json=my_mes)
             # print(response.content)

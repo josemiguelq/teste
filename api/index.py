@@ -20,6 +20,15 @@ def get_part_of_day(h):
     else:
         return "Boa tarde! 🦁 🦁 📱📱"
 
+def message_oi(to_num):
+    tz = pytz.timezone('America/Santiago')
+    part = get_part_of_day(datetime.now(tz).hour)
+    return {'messaging_product': 'whatsapp',
+           'recipient_type': 'individual',
+           'to': to_num,
+           'type': 'text',
+           'text': {'body': part}
+           }
 
 @app.route("/webhook/", methods=["POST", "GET"])
 def webhook_whatsapp():
@@ -50,8 +59,10 @@ def webhook_whatsapp():
 
     if messages[0]:
         message = messages[0]['text']['body']
+        to_num = messages[0]['from']
         e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
         if e_saudacao:
+            ola = message_oi(to_num)
             requests.post(host, headers=my_headers, json=ola)
         if 'modulo' in messages[0]['text']['body']:
             response = requests.post(host, headers=my_headers, json=my_mes)

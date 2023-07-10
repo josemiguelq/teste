@@ -18,7 +18,6 @@ def get_part_of_day(h):
         "Bom dia!"
         if 5 <= h <= 17
         else "Boa tarde"
-        if 12 <= h <= 17
         if 18 <= h <= 22
         else "Boa noite"
     )

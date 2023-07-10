@@ -16,14 +16,13 @@ app = Flask(__name__)
 
 def get_part_of_day(h):
     if 5 <= h <= 12:
-        return "Bom dia!"
+        return "Bom dia! 🦁 🦁 📱📱"
     else:
-        return "Boa tarde!"
+        return "Boa tarde! 🦁 🦁 📱📱"
 
 
 @app.route("/webhook/", methods=["POST", "GET"])
 def webhook_whatsapp():
-    """__summary__: Get message from the webhook"""
     vt = os.environ.get("VERIFY_TOKEN", default="true")
     wpp = os.environ.get("WPP_TOKEN", default="")
 
@@ -38,27 +37,23 @@ def webhook_whatsapp():
 
     tz = pytz.timezone('America/Santiago')
     part = get_part_of_day(datetime.now(tz).hour)
-    print(datetime.now(tz))
     ola = {'messaging_product': 'whatsapp',
            'recipient_type': 'individual',
            'to': '5567991910048',
            'type': 'text',
-           'text' : {'body' : part}
+           'text': {'body': part}
            }
     host = 'https://graph.facebook.com/v17.0/105496645940349/messages'
 
-    list_of_saudacoes = ['oi', 'ola', 'eae', 'eai', 'bom dia']
+    list_of_saudacoes = ['oi', 'ola', 'olá', 'eae', 'eai', 'bom dia']
 
     if messages[0]:
         message = messages[0]['text']['body']
         e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
-        print(e_saudacao)
-        print(ola)
         if e_saudacao:
             requests.post(host, headers=my_headers, json=ola)
         if 'modulo' in messages[0]['text']['body']:
-            response = requests.post('https://graph.facebook.com/v17.0/105496645940349/messages',
-                                     headers=my_headers, json=my_mes)
+            response = requests.post(host, headers=my_headers, json=my_mes)
             # print(response.content)
 
     return jsonify({"status": "success"}, 200)

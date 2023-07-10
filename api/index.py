@@ -15,13 +15,10 @@ app = Flask(__name__)
 
 
 def get_part_of_day(h):
-    return (
-        "Bom dia!"
-        if 5 <= h <= 17
-        else "Boa tarde"
-        if 18 <= h <= 22
-        else "Boa noite"
-    )
+    if 5 <= h <= 12:
+        return "Bom dia!"
+    else
+        return "Boa tarde!"
 
 
 @app.route("/webhook/", methods=["POST", "GET"])
@@ -35,8 +32,6 @@ def webhook_whatsapp():
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
     messages = request.get_json()['entry'][0]['changes'][0]['value']['messages']
-    #    client = WhatsAppWrapper()
-    #    response = client.process_webhook_notification(request.get_json())
     my_headers = {'Authorization': 'Bearer ' + wpp, 'Content-Type': 'application/json'}
     my_mes = {'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template",
               "template": {"name": "hello_world", "language": {"code": "en_US"}}}
@@ -57,7 +52,10 @@ def webhook_whatsapp():
 
     if messages[0]:
         message = messages[0]['text']['body']
-        if any(substring in message.lower() for substring in list_of_saudacoes):
+        e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
+        print(e_saudacao)
+        print(ola)
+        if e_saudacao:
             requests.post(host, headers=my_headers, json=ola)
         if 'modulo' in messages[0]['text']['body']:
             response = requests.post('https://graph.facebook.com/v17.0/105496645940349/messages',

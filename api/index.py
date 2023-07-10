@@ -27,8 +27,9 @@ def webhook_whatsapp():
 #    client = WhatsAppWrapper()
 #    response = client.process_webhook_notification(request.get_json())
     my_headers = {'Authorization' : 'Bearer ' + wpp, 'Content-Type': 'application/json'}
-    my_mes = { "messaging_product": "whatsapp", "to": "5567991910048", "type": "template", "template": { "name": "hello_world", "language": { "code": "en_US" } } }
+    my_mes = { 'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template", "template": { "name": "hello_world", "language": { "code": "en_US" } } }
     response = requests.post('https://graph.facebook.com/v17.0/105496645940349/messages', headers=my_headers, data=my_mes)
+    print(respose.content)
 
     # Do anything with the response
     # Sending a message to a phone number to confirm the webhook is working

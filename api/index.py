@@ -54,8 +54,10 @@ def webhook_whatsapp():
         message = messages[0]['text']['body']
         to_num = messages[0]['from']
         e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
+        print(e_saudacao)
         if e_saudacao:
             ola = message_oi(to_num)
+            print(ola)
             requests.post(host, headers=my_headers, json=ola)
         if 'modulo' in messages[0]['text']['body']:
             response = requests.post(host, headers=my_headers, json=my_mes)

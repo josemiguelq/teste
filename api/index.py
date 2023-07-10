@@ -23,6 +23,7 @@ def webhook_whatsapp():
         if request.args.get('hub.verify_token') == vt:
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
+    print(str(request.get_json()))
 
 #    client = WhatsAppWrapper()
 #    response = client.process_webhook_notification(request.get_json())

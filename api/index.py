@@ -39,20 +39,13 @@ def webhook_whatsapp():
         if request.args.get('hub.verify_token') == vt:
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
-    messages = request.get_json()['entry'][0]['changes'][0]['value']['messages']
-    print(messages)
+    response = request.get_json()
+    print(response)
+    messages = response['entry'][0]['changes'][0]['value']['messages']
     my_headers = {'Authorization': 'Bearer ' + wpp, 'Content-Type': 'application/json'}
     my_mes = {'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template",
               "template": {"name": "hello_world", "language": {"code": "en_US"}}}
 
-    tz = pytz.timezone('America/Santiago')
-    part = get_part_of_day(datetime.now(tz).hour)
-    ola = {'messaging_product': 'whatsapp',
-           'recipient_type': 'individual',
-           'to': '5567991910048',
-           'type': 'text',
-           'text': {'body': part}
-           }
     host = 'https://graph.facebook.com/v17.0/105496645940349/messages'
 
     list_of_saudacoes = ['oi', 'ola', 'olá', 'eae', 'eai', 'bom dia']

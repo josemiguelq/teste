@@ -59,9 +59,8 @@ def webhook_whatsapp():
     host = 'https://graph.facebook.com/v17.0/105496645940349/messages'
 
     list_of_saudacoes = ['oi', 'ola', 'olá', 'eae', 'eai', 'bom dia']
-    print(value_m)
-    if value_m['messages']:
-        messages = value_m['messages']
+    if value_m.get('messages'):
+        messages = value_m.get('messages')
         if messages[0] is not None:
             message = messages[0]['text']['body']
             to_num = to_num_format(messages[0]['from'])

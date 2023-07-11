@@ -35,7 +35,6 @@ def message_oi(to_num):
 
 
 def to_num_format(to_num):
-    print(len(to_num) == 12)
     if len(to_num) == 12:
         return to_num[:4] + '9' + to_num[4:]
     else:
@@ -52,7 +51,6 @@ def webhook_whatsapp():
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
     response = request.get_json()
-    print(response)
     value_m = response['entry'][0]['changes'][0]['value']
     my_headers = {'Authorization': 'Bearer ' + wpp, 'Content-Type': 'application/json'}
     my_mes = {'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template",
@@ -61,11 +59,9 @@ def webhook_whatsapp():
     host = 'https://graph.facebook.com/v17.0/105496645940349/messages'
 
     list_of_saudacoes = ['oi', 'ola', 'olá', 'eae', 'eai', 'bom dia']
-
+    print(value_m)
     if value_m['messages']:
-        messages = ['messages']
-        print(messages)
-        print(messages[0] is not None)
+        messages = value_m['messages']
         if messages[0] is not None:
             message = messages[0]['text']['body']
             to_num = to_num_format(messages[0]['from'])

@@ -51,6 +51,7 @@ def webhook_whatsapp():
             return request.args.get('hub.challenge')
         return "Authentication failed. Invalid Token."
     response = request.get_json()
+    print(response)
     value_m = response['entry'][0]['changes'][0]['value']
     my_headers = {'Authorization': 'Bearer ' + wpp, 'Content-Type': 'application/json'}
     my_mes = {'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template",

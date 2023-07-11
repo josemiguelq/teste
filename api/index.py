@@ -53,7 +53,7 @@ def webhook_whatsapp():
         return "Authentication failed. Invalid Token."
     response = request.get_json()
     print(response)
-    messages = response['entry'][0]['changes'][0]['value']['messages']
+    value_m = response['entry'][0]['changes'][0]['value']
     my_headers = {'Authorization': 'Bearer ' + wpp, 'Content-Type': 'application/json'}
     my_mes = {'messaging_product': 'whatsapp', 'to': '5567991910048', "type": "template",
               "template": {"name": "hello_world", "language": {"code": "en_US"}}}
@@ -62,19 +62,21 @@ def webhook_whatsapp():
 
     list_of_saudacoes = ['oi', 'ola', 'olá', 'eae', 'eai', 'bom dia']
 
-    if messages[0]:
-        message = messages[0]['text']['body']
-        to_num = to_num_format(messages[0]['from'])
-        e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
-        print(e_saudacao)
-        if e_saudacao:
-            ola = message_oi(to_num)
-            print(ola)
-            response = requests.post(host, headers=my_headers, json=ola)
-            print(response.get_json())
-        if 'modulo' in messages[0]['text']['body']:
-            response = requests.post(host, headers=my_headers, json=my_mes)
-            # print(response.content)
+    if value_m['messages']:
+        messages = ['messages']
+        if messages[0]:
+            message = messages[0]['text']['body']
+            to_num = to_num_format(messages[0]['from'])
+            e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
+            print(e_saudacao)
+            if e_saudacao:
+                ola = message_oi(to_num)
+                print(ola)
+                response = requests.post(host, headers=my_headers, json=ola)
+                print(response.get_json())
+            if 'modulo' in messages[0]['text']['body']:
+                response = requests.post(host, headers=my_headers, json=my_mes)
+                # print(response.content)
 
     return jsonify({"status": "success"}, 200)
 

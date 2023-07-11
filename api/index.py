@@ -40,7 +40,7 @@ def to_num_format(to_num):
     else:
         return to_num
 
-def handle_message(messages, my_headers):
+def handle_message(messages):
     wpp = os.environ.get("WPP_TOKEN", default="")
     my_headers = {'Authorization': 'Bearer ' + wpp, 'Content-Type': 'application/json'}
     host = 'https://graph.facebook.com/v17.0/105496645940349/messages'

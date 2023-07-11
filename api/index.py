@@ -64,7 +64,9 @@ def webhook_whatsapp():
 
     if value_m['messages']:
         messages = ['messages']
-        if messages[0]:
+        print(messages)
+        print(messages[0] is not None)
+        if messages[0] is not None:
             message = messages[0]['text']['body']
             to_num = to_num_format(messages[0]['from'])
             e_saudacao = any(substring in message.lower() for substring in list_of_saudacoes)
